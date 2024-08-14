@@ -2,6 +2,7 @@
 """_summary_
     """
 
+from typing import Union
 import redis
 import uuid
 
@@ -14,7 +15,7 @@ class Cache:
         self._redis = redis.Redis()
         self._redis.flushdb()
 
-    def store(self, data: object) -> str:
+    def store(self, data: Union[str, bytes, int, float]) -> str:
         key = str(uuid.uuid1())
         self._redis.set(key, data)
         return key
